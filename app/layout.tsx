@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Login Supabase Template",
-  description: "Prepared by Aniket Pant for Supabase-based projects",
+  title: "Workout App",
+  description: "A simple workout app to push your fitness limits",
 };
 
 export default function RootLayout({

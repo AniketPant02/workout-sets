@@ -1,6 +1,5 @@
 'use server'
 import { redirect } from 'next/navigation'
-import { revalidatePath } from 'next/cache'
 import { createClient } from '@/utils/supabase/server'
 
 // for vercel deployment
@@ -18,7 +17,34 @@ export async function signInWithGitHub() {
     })
     if (error) { redirect('/error') }
     if (data.url) {
-        revalidatePath('/', 'layout')
+        redirect(data.url)
+    }
+}
+
+export async function signInWithDiscord() {
+    const supabase = await createClient()
+    const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: 'discord',
+        options: {
+            redirectTo: redirectToURL,
+        },
+    })
+    if (error) { redirect('/error') }
+    if (data.url) {
+        redirect(data.url)
+    }
+}
+
+export async function signInWithGoogle() {
+    const supabase = await createClient()
+    const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+            redirectTo: redirectToURL,
+        },
+    })
+    if (error) { redirect('/error') }
+    if (data.url) {
         redirect(data.url)
     }
 }
