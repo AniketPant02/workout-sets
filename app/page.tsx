@@ -9,15 +9,13 @@ import useUser from '@/hooks/useUser';
 import WorkoutCard from '@/components/WorkoutCard';
 import useWorkouts from '@/hooks/useWorkouts';
 
-import type { Workout, Exercise } from '@/components/WorkoutCard';
+import type { Workout } from '@/components/WorkoutCard';
 
 export default function Home(): React.ReactElement {
   const user = useUser();
   const supabase = createClient();
   const router = useRouter();
   const { workouts = [], isLoading } = useWorkouts();
-
-  console.log(workouts);
 
   const handleSignOut = async (): Promise<void> => {
     const { error } = await supabase.auth.signOut();
